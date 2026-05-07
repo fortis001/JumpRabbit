@@ -1,6 +1,5 @@
 
 <details>
-
 <summary>26.05.06</summary>
 
 # 작업 요약
@@ -20,4 +19,24 @@
 규모가 커지면서 원하는 코드를 한 번에 찾기 어려워지는 한계가 있었다.<br>
 이번에는 시작부터 디렉토리 구조를 잡고 가는 것으로 유지보수 효율을 올려 보려고 한다.
   
+</details>
+
+<details>
+<summary>26.05.07</summary>
+
+# 작업 요약
+
+# 작업 상세
+
+# 주석
+</details>
+
+<details>
+<summary>26.nn.nn</summary>
+
+# 작업 요약
+
+# 작업 상세
+
+# 주석
 </details>
