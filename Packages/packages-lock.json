@@ -1,5 +1,19 @@
 {
   "dependencies": {
+    "com.lsh.core": {
+      "version": "https://github.com/fortis001/Unity-LSH-Core.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "4fb2a82105a5876d3b2cf0e11ed7e4899299b5da"
+    },
+    "com.lsh.utils": {
+      "version": "https://github.com/fortis001/Unity-LSH-Utils.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "1933a9194c60a1fff62342992ffb97f2e15a4541"
+    },
     "com.unity.2d.animation": {
       "version": "10.1.4",
       "depth": 1,
@@ -14,7 +28,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.2d.aseprite": {
-      "version": "1.1.8",
+      "version": "1.1.11",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -139,7 +153,7 @@
         "com.unity.2d.spriteshape": "10.0.7",
         "com.unity.2d.tilemap": "1.0.0",
         "com.unity.2d.tilemap.extras": "4.1.0",
-        "com.unity.2d.aseprite": "1.1.8"
+        "com.unity.2d.aseprite": "1.1.11"
       }
     },
     "com.unity.ide.rider": {

@@ -1,39 +1,25 @@
-namespace LSH.Core
+using LSH.Core;
+
+namespace JumpRabbit.Core
 {
+    [SceneNameEnum]
     public enum SceneNameType
     {
-        Entry,
-        Title,
-        InGame,
-        Result,
-
-
+        Entry = 0,
+        Title = 1,
+        InGame = 2,
+        Result = 3,
 
         Loading = 99
     }
 
-    public struct SceneName
+    public static class SceneName
     {
-        private readonly string _value;
+        public static SceneReference Entry => SceneNameUtility.From(SceneNameType.Entry);
+        public static SceneReference Title => SceneNameUtility.From(SceneNameType.Title);
+        public static SceneReference InGame => SceneNameUtility.From(SceneNameType.InGame);
+        public static SceneReference Result => SceneNameUtility.From(SceneNameType.Result);
 
-        private SceneName(SceneNameType type)
-        {
-            _value = $"{(int)type:D2}_{type}";
-        }
-
-        public static implicit operator string(SceneName sceneName) => sceneName._value;
-
-
-
-        public static SceneName Entry => new SceneName(SceneNameType.Entry);
-        public static SceneName Title => new SceneName(SceneNameType.Title);
-        public static SceneName InGame => new SceneName(SceneNameType.InGame);
-        public static SceneName Result => new SceneName(SceneNameType.Result);
-
-
-
-        public static SceneName Loading => new SceneName(SceneNameType.Loading);
-
-        public override string ToString() => _value;
+        public static SceneReference Loading => SceneNameUtility.From(SceneNameType.Loading);
     }
 }
