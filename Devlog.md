@@ -41,7 +41,24 @@
 
 </details>
 
+<details>
+<summary>26.05.09</summary>
 
+# 작업 요약
+- 플레이어 구조 설계 및 점프 기능 추가
+  - 애니메이션, 트랜지션, 스크립트 추가
+# 작업 상세
+- Player 구조 설계
+  - PlayerActor(외부 호출용 허브 및 내부 Init 담당), Controller, Movement, Sound, Animation 객체로 분리
+- Player 애니메이션 작업 착수
+  - Idle, ReadyJump, Jump 세 가지 애니메이션과 트랜지션, 파라미터 enum 제작
+- Player 점프 기능 추가
+  - 스페이스 홀딩으로 차지, 마우스 방향으로 점프 가능
+# 주석
+본격적으로 프로젝트 작업에 들어갔다. 애니메이션 사용법을 배우고<br>
+스페이스 홀딩으로 점프 기능까지 추가했다.
+
+</details>
 
 <!-- 탬플릿
 <details>
