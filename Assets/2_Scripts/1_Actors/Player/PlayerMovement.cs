@@ -1,3 +1,4 @@
+using System;
 using JumpRabbit.Core;
 using UnityEngine;
 
@@ -27,6 +28,8 @@ namespace JumpRabbit.Actors.Player
             TimeManager.Instance.GameTime.Time >=
             _lastJumpTime + _groundCheckDisableTimeAfterJump;
 
+        public event Action OnLanded;
+
 
         private void FixedUpdate()
         {
@@ -36,7 +39,7 @@ namespace JumpRabbit.Actors.Player
 
             if (!_wasGrounded && IsGrounded && _rigidbody.linearVelocity.y <= 0f)
             {
-                OnLanded();
+                LandingSequence();
             }
         }
 
@@ -89,7 +92,7 @@ namespace JumpRabbit.Actors.Player
             return direction;
         }
 
-        private void OnLanded()
+        private void LandingSequence()
         {
             Vector2 velocity = _rigidbody.linearVelocity;
 
@@ -101,6 +104,8 @@ namespace JumpRabbit.Actors.Player
             velocity.x *= _landingHorizontalDamping;
 
             _rigidbody.linearVelocity = velocity;
+
+            OnLanded?.Invoke();
         }
     }
 }

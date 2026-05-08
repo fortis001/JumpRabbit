@@ -268,6 +268,8 @@ GameObject:
   - component: {fileID: 374528027}
   - component: {fileID: 374528026}
   - component: {fileID: 374528032}
+  - component: {fileID: 374528033}
+  - component: {fileID: 374528034}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -301,7 +303,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 374528030}
   _groundCheck: {fileID: 444669828}
-  _jumpPower: 7
   _groundCheckDisableTimeAfterJump: 0.1
   _landingHorizontalDamping: 0.5
   _groundCheckSize: {x: 0.4, y: 0.08}
@@ -320,6 +321,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6a82315d7820c4099fa7570bcefce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
+  _minJumpPower: 5
+  _maxJumpPower: 12
+  _chargeDuration: 1
 --- !u!114 &374528029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,8 +340,9 @@ MonoBehaviour:
   _controller: {fileID: 374528028}
   _movement: {fileID: 374528027}
   _sound: {fileID: 374528026}
+  _animation: {fileID: 374528034}
   _body: {fileID: 1132740505}
-  _animator: {fileID: 0}
+  _animator: {fileID: 374528033}
   _spriteRenderer: {fileID: 1132740504}
 --- !u!50 &374528030
 Rigidbody2D:
@@ -418,6 +424,41 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0.47}
   m_Radius: 0.5
+--- !u!95 &374528033
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374528025}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 24403a81fdd9ebc42a65f20004b70efd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &374528034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374528025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88edab0cc9d331b4a833b5295ccf5550, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 374528033}
 --- !u!1 &414701589
 GameObject:
   m_ObjectHideFlags: 0

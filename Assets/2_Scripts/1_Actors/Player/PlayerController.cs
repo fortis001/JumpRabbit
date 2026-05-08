@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 namespace JumpRabbit.Actors.Player
 {
     public class PlayerController : MonoBehaviour
-    {
+    {     
         [Header("Jump Charge")]
         [SerializeField] private float _minJumpPower = 5f;
         [SerializeField] private float _maxJumpPower = 12f;
@@ -16,6 +16,7 @@ namespace JumpRabbit.Actors.Player
         private InputManager _inputManager;
         private PlayerMovement _movement;
         private PlayerSound _sound;
+        private PlayerAnimation _animation;
 
         private InputAction _jumpAction;
 
@@ -23,17 +24,19 @@ namespace JumpRabbit.Actors.Player
         private float _chargeStartTime;
         private float _currentJumpPower;
 
-        public void Init(InputManager inputManager, PlayerMovement movement, PlayerSound sound)
+        public void Init(InputManager inputManager, PlayerMovement movement, PlayerSound sound, PlayerAnimation animation)
         {
             _inputManager = inputManager;
             _movement = movement;
             _sound = sound;
+            _animation = animation;
 
             _jumpAction = inputManager.GetAction("Jump");
 
+            _jumpAction.started += HandleJumpStarted;
+            _jumpAction.canceled += HandleJumpCanceled;
 
-            _jumpAction.started += OnJumpStarted;
-            _jumpAction.canceled += OnJumpCanceled;
+            _movement.OnLanded += HandleLanded;
         }
 
         private void Update()
@@ -47,7 +50,7 @@ namespace JumpRabbit.Actors.Player
             _currentJumpPower = Mathf.Lerp(_minJumpPower, _maxJumpPower, t);
         }
 
-        private void OnJumpStarted(InputAction.CallbackContext context)
+        private void HandleJumpStarted(InputAction.CallbackContext context)
         {
             if (!_movement.IsGrounded)
                 return;
@@ -55,9 +58,11 @@ namespace JumpRabbit.Actors.Player
             _isChargingJump = true;
             _chargeStartTime = TimeManager.Instance.GameTime.Time;
             _currentJumpPower = _minJumpPower;
+
+            _animation.PlayReadyJump();
         }
 
-        private void OnJumpCanceled(InputAction.CallbackContext context)
+        private void HandleJumpCanceled(InputAction.CallbackContext context)
         {
             if (!_isChargingJump)
                 return;
@@ -69,10 +74,16 @@ namespace JumpRabbit.Actors.Player
 
             if (_movement.TryJumpTo(mouseWorldPosition, _currentJumpPower))
             {
+                _animation.PlayJump();
                 _sound.PlayJump();
             }
 
             _currentJumpPower = 0f;
+        }
+
+        private void HandleLanded()
+        {
+            _animation.PlayIdle();
         }
 
         private void OnDestroy()
@@ -80,8 +91,8 @@ namespace JumpRabbit.Actors.Player
             if (_jumpAction == null)
                 return;
 
-            _jumpAction.started -= OnJumpStarted;
-            _jumpAction.canceled -= OnJumpCanceled;
+            _jumpAction.started -= HandleJumpStarted;
+            _jumpAction.canceled -= HandleJumpCanceled;
         }
 
     }

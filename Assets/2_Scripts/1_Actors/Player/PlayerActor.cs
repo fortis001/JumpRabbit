@@ -11,6 +11,7 @@ namespace JumpRabbit.Actors
         [SerializeField] private PlayerController _controller; 
         [SerializeField] private PlayerMovement _movement;
         [SerializeField] private PlayerSound _sound;
+        [SerializeField] private PlayerAnimation _animation;
 
         [Header("View")]
         [SerializeField] private Transform _body;
@@ -21,6 +22,8 @@ namespace JumpRabbit.Actors
         public PlayerController Controller => _controller;
         public PlayerMovement Movement => _movement;
         public PlayerSound Sound => _sound;
+        public PlayerAnimation Animation => _animation;
+
 
         public Transform Body => _body;
         public Animator Animator => _animator;
@@ -31,7 +34,8 @@ namespace JumpRabbit.Actors
 
         public void Init(InputManager inputManager)
         {
-            _controller.Init(inputManager, _movement, _sound);
+            _controller.Init(inputManager, _movement, _sound, _animation);
+            _animation.Init();
         }
     }
 }
