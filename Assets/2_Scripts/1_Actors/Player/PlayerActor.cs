@@ -35,7 +35,7 @@ namespace JumpRabbit.Actors
         public void Init(InputManager inputManager)
         {
             _controller.Init(inputManager, _movement, _sound, _animation);
-            _animation.Init();
+            _animation.Init(_spriteRenderer);
         }
     }
 }

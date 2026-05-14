@@ -17,6 +17,7 @@ namespace JumpRabbit.Actors.Player
         private PlayerMovement _movement;
         private PlayerSound _sound;
         private PlayerAnimation _animation;
+        private Camera _mainCamera;
 
         private InputAction _jumpAction;
 
@@ -30,8 +31,9 @@ namespace JumpRabbit.Actors.Player
             _movement = movement;
             _sound = sound;
             _animation = animation;
+            _mainCamera = Camera.main;
 
-            _jumpAction = inputManager.GetAction("Jump");
+            _jumpAction = inputManager.GetAction(InputActionName.Jump);
 
             _jumpAction.started += HandleJumpStarted;
             _jumpAction.canceled += HandleJumpCanceled;
@@ -41,9 +43,25 @@ namespace JumpRabbit.Actors.Player
 
         private void Update()
         {
-            if (!_isChargingJump)
+            UpdateLookDirection();
+
+            if (_isChargingJump)
+            {
+                UpdateJumpCharge();
+            }
+        }
+
+        private void UpdateLookDirection()
+        {
+            if (!_movement.IsGrounded)
                 return;
 
+            Vector2 mouseWorldPosition = GetMouseWorldPosition();
+            _animation.LookAt(mouseWorldPosition);
+        }
+
+        private void UpdateJumpCharge()
+        {
             float elapsed = TimeManager.Instance.GameTime.Time - _chargeStartTime;
             float t = Mathf.Clamp01(elapsed / _chargeDuration);
 
@@ -69,8 +87,7 @@ namespace JumpRabbit.Actors.Player
 
             _isChargingJump = false;
 
-            Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(
-                Mouse.current.position.ReadValue());
+            Vector2 mouseWorldPosition = GetMouseWorldPosition();
 
             if (_movement.TryJumpTo(mouseWorldPosition, _currentJumpPower))
             {
@@ -84,6 +101,12 @@ namespace JumpRabbit.Actors.Player
         private void HandleLanded()
         {
             _animation.PlayIdle();
+        }
+
+        private Vector2 GetMouseWorldPosition()
+        {
+            return _mainCamera.ScreenToWorldPoint(
+                Mouse.current.position.ReadValue());
         }
 
         private void OnDestroy()

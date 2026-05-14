@@ -15,5 +15,6 @@ namespace JumpRabbit.Core
     public static class InputActionName
     {
         public const string Jump = "Jump";
+        public const string Zoom = "Zoom";
     }
 }
