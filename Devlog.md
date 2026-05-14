@@ -59,6 +59,30 @@
 스페이스 홀딩으로 점프 기능까지 추가했다.
 
 </details>
+<details>
+<summary>~26.05.14</summary>
+
+# 작업 요약
+- 플레이어 기능 및 플랫폼 스폰 로직, 카메라 기능 추가
+  - Additional 기능 외 플레이어와 플랫폼, 카메라 로직 완성
+# 작업 상세
+- Player 애니메이션 추가
+  - Idle, ReadyJump, Jump 애니메이션 연결
+  - 코어 패키지의 InputManager과 ActionMap을 연동해 Movement의 점프 로직, 랜딩 이벤트 등 작업
+- Platform 및 스포너, 매니저 추가
+  - Prefab variant를 활용해 사이즈별 프리팹과 이를 관리하기 위한 ScriptableObj 추가
+  - 스포너, 매니저 스크립트 작성
+- CameraController 추가
+  - 추후 코어 패키지에 포함시키기 위해 인게임 기능은 InGameCameraController로 분리
+  - Focus, Zoom 기능 추가
+# 주석
+기본적인 게임 로직 완성 단계에 들어갔다. 스코어, 보너스, UI만 추가하면 인게임 씬은 완료될 것 같다.<br>
+코어 패키지도 현재까진 문제없이 적용하고 있다. 특히 InputManager와 New Input System은<br>
+이번 프로젝트에서 처음 도입했는데, 잘 작동하고 있는 것 같다.<br>
+다음 작업은 인게임 씬 마무리 작업이 될 것이고<br>
+이후 타이틀, 로딩 씬 등 필요한 간단한 씬을 만들면 이번 프로젝트는 마무리될 것 같다.
+
+</details>
 
 <!-- 탬플릿
 <details>
