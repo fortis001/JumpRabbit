@@ -71,7 +71,7 @@
   - 코어 패키지의 InputManager과 ActionMap을 연동해 Movement의 점프 로직, 랜딩 이벤트 등 작업
 - Platform 및 스포너, 매니저 추가
   - Prefab variant를 활용해 사이즈별 프리팹과 이를 관리하기 위한 ScriptableObj 추가
-  - 스포너, 매니저 스크립트 작성
+  - 오브젝트 풀링을 이용한 스포너, 매니저 스크립트 작성
 - CameraController 추가
   - 추후 코어 패키지에 포함시키기 위해 인게임 기능은 InGameCameraController로 분리
   - Focus, Zoom 기능 추가
