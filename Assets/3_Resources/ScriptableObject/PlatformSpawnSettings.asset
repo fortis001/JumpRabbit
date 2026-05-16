@@ -19,7 +19,7 @@ MonoBehaviour:
     - {fileID: 7825794838322098559, guid: a61b41f3f8ba8b2468d1f423bb57d637, type: 3}
     - {fileID: 7825794838322098559, guid: 2b786accd51dfd14e8613bdcfbd83ab6, type: 3}
     - {fileID: 7825794838322098559, guid: dda8d8c12e2b6164d8fa52cb7cf958b4, type: 3}
-    _baseXGap: 0
+    _baseXGap: 2
     _xGapRange:
       _min: 0
       _max: 3
@@ -32,7 +32,7 @@ MonoBehaviour:
     - {fileID: 5368979599150560593, guid: 2966991cf8e1ae14f9fd855ecf3dcdcc, type: 3}
     - {fileID: 5368979599150560593, guid: 91de1ad6dbd090742944e0d31c8cfe7e, type: 3}
     - {fileID: 5368979599150560593, guid: 50f8c5e8a7b044246943a6386c1bbeba, type: 3}
-    _baseXGap: 1
+    _baseXGap: 3
     _xGapRange:
       _min: 0
       _max: 3
@@ -45,7 +45,7 @@ MonoBehaviour:
     - {fileID: 1698408215933312067, guid: 40427d6ad3a86e54cba2ec8d2616a4f1, type: 3}
     - {fileID: 1698408215933312067, guid: 234f9daf100d94546a64f80681196bc5, type: 3}
     - {fileID: 1698408215933312067, guid: 9a893516c0187dd4c9b27105705e750d, type: 3}
-    _baseXGap: 2
+    _baseXGap: 4
     _xGapRange:
       _min: 0
       _max: 3
@@ -53,3 +53,7 @@ MonoBehaviour:
     _yOffsetRange:
       _min: 0
       _max: 0
+  _carrotSpawnData:
+    _carrotPrefab: {fileID: 8510056427911503659, guid: b13a1d2e02968c64081c34370b6077eb, type: 3}
+    _carrotSpawnChance: 0.05
+    _carrotSpawnOffset: {x: 0, y: 1, z: 0}

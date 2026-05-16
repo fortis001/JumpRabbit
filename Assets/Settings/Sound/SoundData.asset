@@ -12,5 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1de6095801295e847b63b51490335e2c, type: 3}
   m_Name: SoundData
   m_EditorClassIdentifier: 
-  sfxList: []
-  bgmList: []
+  sfxList:
+  - id:
+      _id: 200
+      _name: Player_Jump
+    clip: {fileID: 8300000, guid: 4973db4449778d64cad7dee8f61ee655, type: 3}
+  bgmList:
+  - id:
+      _id: 200
+      _name: InGame
+    clip: {fileID: 8300000, guid: e0e43c628e1bee542bd57ac3d8780aff, type: 3}

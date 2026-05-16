@@ -57,14 +57,28 @@ namespace JumpRabbit.GamePlay.Entities
         }
     }
 
+    [Serializable]
+    public class CarrotSpawnData
+    {
+        [SerializeField] private BonusCarrot _carrotPrefab;
+        [SerializeField] private float _carrotSpawnChance = 0.05f;
+        [SerializeField] private Vector3 _carrotSpawnOffset = new Vector3(0, 5f, 0);
+
+        public BonusCarrot CarrotPrefab => _carrotPrefab;
+        public float CarrotSpawnChance => _carrotSpawnChance;
+        public Vector3 CarrotSpawnOffset => _carrotSpawnOffset;
+    }
+
     [CreateAssetMenu(
         fileName = "PlatformSpawnSettings",
         menuName = "JumpRabbit/Gameplay/Platform Spawn Settings")]
     public class PlatformSpawnSettings : ScriptableObject
     {
         [SerializeField] private List<PlatformGroup> _platformGroups = new();
+        [SerializeField] private CarrotSpawnData _carrotSpawnData;
 
         public IReadOnlyList<PlatformGroup> PlatformGroups => _platformGroups;
+        public CarrotSpawnData CarrotSpawnData => _carrotSpawnData;
 
         public bool TryGetGroup(PlatformSize size, out PlatformGroup result)
         {

@@ -11,15 +11,16 @@ namespace JumpRabbit.Core
     }
     public class CameraController : MonoBehaviour
     {
-        [Header("Focus")]
         [SerializeField] private Camera _camera;
+
+        [Header("Focus")]
         [SerializeField] private Vector3 _offset = new(0f, 0f, -10f);
         [SerializeField] private float _moveDuration = 0.25f;
         [SerializeField] private CameraFocusAxis _focusAxis = CameraFocusAxis.XY;
 
         [Header("Zoom")]
         [SerializeField] private float _zoomSpeed = 0.5f;
-        [SerializeField] private float _minZoom = 4f;
+        [SerializeField] private float _minZoom = 5f;
         [SerializeField] private float _maxZoom = 8f;
 
         private Coroutine _moveCoroutine;

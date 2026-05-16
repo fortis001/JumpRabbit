@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7807551909336977288}
   - component: {fileID: 7741903027789296165}
+  - component: {fileID: 3764677479745869062}
   m_Layer: 0
   m_Name: Platform_Base
   m_TagString: Untagged
@@ -47,6 +48,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collisionRelay: {fileID: 7203025877608494091}
   _bodyCollider: {fileID: 7865868318245478937}
+  _animation: {fileID: 3764677479745869062}
+--- !u!111 &3764677479745869062
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2812435408754591878}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: f77e4ab918bb4654fa8b34ce8a7bdeb6, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: f77e4ab918bb4654fa8b34ce8a7bdeb6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
 --- !u!1 &8093578395986465887
 GameObject:
   m_ObjectHideFlags: 0

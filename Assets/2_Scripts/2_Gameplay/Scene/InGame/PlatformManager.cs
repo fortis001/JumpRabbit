@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using JumpRabbit.GamePlay.Entities;
 using UnityEngine;
@@ -16,15 +17,20 @@ namespace JumpRabbit.GamePlay.InGame
         
 
         private InGameCameraController _cameraController;
+        private Transform _player;
         private PlatformPool _platformPool;
+
+
         private Platform _lastPlatform;
         private Queue<Platform> _platformQueue = new();
         private int _currentPlayerIndex = 0;
         private int _currentPlatformIndex;
 
+        public event Action<Platform> OnValidPlatformLanded;
+        public event Action<Platform> OnInvalidPlatformLanded;
+        public event Action<float> OnCarrotCollected;
 
-
-        public void Init(InGameCameraController cameraController)
+        public void Init(InGameCameraController cameraController, Transform player)
         {
             _platformPool = new PlatformPool(_poolRoot);
             _platformPool.Init(_spawnSettings.PlatformGroups, _prewarmCount);
@@ -38,6 +44,8 @@ namespace JumpRabbit.GamePlay.InGame
             }
 
             _cameraController = cameraController;
+
+            _player = player;
         }
 
         private void SpawnNextPlatform()
@@ -55,13 +63,14 @@ namespace JumpRabbit.GamePlay.InGame
             platform.transform.SetPositionAndRotation(spawnPosition, Quaternion.identity);
 
             _currentPlatformIndex++;
-            platform.Activate(_currentPlatformIndex);
+            platform.Activate(_currentPlatformIndex, spawnData.Size);
             platform.OnPlayerLanded += HandlePlayerLandedPlatform;
 
             _platformQueue.Enqueue(platform);
 
             _lastPlatform = platform;
 
+            TrySpawnCarrot(platform);
         }
 
         private Vector3 GetNextPosition(Platform nextPlatform, Vector2 spawnoffset)
@@ -77,8 +86,31 @@ namespace JumpRabbit.GamePlay.InGame
             return nextPosition;
         }
 
+        private void TrySpawnCarrot(Platform platform)
+        {
+            CarrotSpawnData spawnData = _spawnSettings.CarrotSpawnData;
+
+            if(UnityEngine.Random.value <= spawnData.CarrotSpawnChance)
+            {
+                BonusCarrot carrot = Instantiate(spawnData.CarrotPrefab, platform.transform.position + spawnData.CarrotSpawnOffset, Quaternion.identity);
+                carrot.OnCollected += HandleCarrotCollected;
+                carrot.Init();
+                platform.SetCarrot(carrot);
+            }
+        }
+
+        private void HandleCarrotCollected(BonusCarrot carrot, float additionalBonusRate)
+        {
+            carrot.OnCollected -= HandleCarrotCollected;
+            Destroy(carrot.gameObject);
+
+            OnCarrotCollected?.Invoke(additionalBonusRate);
+        }
+
         private void HandlePlayerLandedPlatform(Platform platform, bool isFirstVisit)
         {
+            if (platform.transform.position.y > _player.position.y) return;
+
             if (isFirstVisit && platform.Index > _currentPlayerIndex)
             {
                 int passCount = platform.Index - _currentPlayerIndex;
@@ -90,6 +122,11 @@ namespace JumpRabbit.GamePlay.InGame
                 }
                 ReleaseOldPlatform();
 
+                OnValidPlatformLanded?.Invoke(platform);
+            }
+            else
+            {
+                OnInvalidPlatformLanded?.Invoke(platform);
             }
 
             if (_cameraController != null)
@@ -108,6 +145,13 @@ namespace JumpRabbit.GamePlay.InGame
                     continue;
 
                 platform.OnPlayerLanded -= HandlePlayerLandedPlatform;
+
+                BonusCarrot carrot = platform.Carrot;
+                if (carrot != null)
+                {
+                    carrot.OnCollected -= HandleCarrotCollected;
+                }
+
                 DespawnPlatform(platform);
             }
         }

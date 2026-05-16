@@ -8,8 +8,8 @@ namespace JumpRabbit.Actors.Player
     public class PlayerController : MonoBehaviour
     {     
         [Header("Jump Charge")]
-        [SerializeField] private float _minJumpPower = 5f;
-        [SerializeField] private float _maxJumpPower = 12f;
+        [SerializeField] private float _minJumpPower = 6.5f;
+        [SerializeField] private float _maxJumpPower = 20f;
         [SerializeField] private float _chargeDuration = 1f;
 
 

@@ -18,10 +18,10 @@ namespace JumpRabbit.GamePlay.Entities
             _poolRoot = poolRoot;
         }
 
-        public void Init(IReadOnlyList<PlatformGroup> platformGroups, int prewarmCount)
+        public void Init(IReadOnlyList<PlatformGroup> platformGroups, int prewarmCount = 2)
         {
-            Prewarm(platformGroups);
             _prewarmCount = prewarmCount;
+            Prewarm(platformGroups);
         }
 
         private void Prewarm(IReadOnlyList<PlatformGroup> platformGroups)
@@ -68,8 +68,6 @@ namespace JumpRabbit.GamePlay.Entities
                 : CreateNew(prefab);
 
             platform.transform.SetParent(null);
-     
-            platform.gameObject.SetActive(true);
 
             return platform;
         }
@@ -85,7 +83,6 @@ namespace JumpRabbit.GamePlay.Entities
                 return;
             }
 
-            platform.gameObject.SetActive(false);
             platform.transform.SetParent(_poolRoot);
 
             _pools[prefab].Enqueue(platform);

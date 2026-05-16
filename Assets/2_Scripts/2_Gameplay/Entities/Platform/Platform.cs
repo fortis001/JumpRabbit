@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Drawing;
 using UnityEngine;
 
 
@@ -8,14 +10,21 @@ namespace JumpRabbit.GamePlay.Entities
     {
         [SerializeField] private CollisionRelay2D _collisionRelay;
         [SerializeField] private BoxCollider2D _bodyCollider;
+        [SerializeField] private Animation _animation;
 
         public event Action<Platform, bool> OnPlayerLanded;
 
+        private bool _isLandingEffectPlaying;
+
         private bool _isVisited;
         private int _index;
+        private PlatformSize _size;
+        private BonusCarrot _carrot;
 
         public int Index => _index;
+        public PlatformSize Size => _size;
         public float HalfWidth => _bodyCollider.bounds.extents.x;
+        public BonusCarrot Carrot => _carrot;
 
         public void Init()
         {
@@ -30,10 +39,25 @@ namespace JumpRabbit.GamePlay.Entities
 
         }
 
-        public void Activate(int index)
+        public void Activate(int index, PlatformSize size)
         {
-            _isVisited = false;
             _index = index;
+            _size = size;
+            _isVisited = false;
+
+            gameObject.SetActive(true);
+        }
+
+        public void SetCarrot(BonusCarrot carrot)
+        {
+            _carrot = carrot;
+            _carrot.OnCollected += HandleCarrotCollected;
+        }
+
+        private void HandleCarrotCollected(BonusCarrot carrot, float bonusRate)
+        {
+            _carrot.OnCollected -= HandleCarrotCollected;
+            _carrot = null;
         }
 
         public void Deactivate()
@@ -41,12 +65,24 @@ namespace JumpRabbit.GamePlay.Entities
             _isVisited = false;
             _index = -1;
             OnPlayerLanded = null;
+
+            if(_carrot != null)
+            {
+                Destroy(_carrot.gameObject);
+            }
+
+            gameObject.SetActive(false);
         }
 
         private void HandleCollisionEntered(Collision2D collision)
         {
             if (!collision.collider.CompareTag("Player"))
                 return;
+
+            if (_isLandingEffectPlaying)
+                return;
+
+            StartCoroutine(PlayLandingEffect());
 
             bool isFirstVisit = !_isVisited;
 
@@ -56,6 +92,17 @@ namespace JumpRabbit.GamePlay.Entities
             }
 
             OnPlayerLanded?.Invoke(this, isFirstVisit);
+        }
+
+        private IEnumerator PlayLandingEffect()
+        {
+            _isLandingEffectPlaying = true;
+
+            _animation.Play();
+
+            yield return new WaitForSeconds(_animation.clip.length);
+
+            _isLandingEffectPlaying = false;
         }
 
         private void OnDestroy()
