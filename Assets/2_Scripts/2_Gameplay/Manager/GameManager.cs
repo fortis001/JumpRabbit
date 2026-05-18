@@ -1,7 +1,7 @@
 using LSH.Core;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour, IBootable
+public class GameManager : Singleton<GameManager>,IBootable
 {
 
     public void Init()
@@ -10,5 +10,8 @@ public class GameManager : MonoBehaviour, IBootable
     }
 
 
-    
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }

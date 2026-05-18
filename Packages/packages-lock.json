@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "4fb2a82105a5876d3b2cf0e11ed7e4899299b5da"
+      "hash": "6dff9e586d63c35d222d76e4a566e80862953fe0"
     },
     "com.lsh.utils": {
       "version": "https://github.com/fortis001/Unity-LSH-Utils.git",

@@ -14,11 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxList:
   - id:
+      _id: 100
+      _name: UI_Btn_Click
+    clip: {fileID: 8300000, guid: 4a85c4cc3ddf8e14b9b97afc8c534c4e, type: 3}
+    volume: 1
+  - id:
+      _id: 101
+      _name: UI_Btn_Hover
+    clip: {fileID: 8300000, guid: 4a85c4cc3ddf8e14b9b97afc8c534c4e, type: 3}
+    volume: 1
+  - id:
       _id: 200
       _name: Player_Jump
     clip: {fileID: 8300000, guid: 4973db4449778d64cad7dee8f61ee655, type: 3}
+    volume: 1
   bgmList:
+  - id:
+      _id: 100
+      _name: Title
+    clip: {fileID: 8300000, guid: fba0718fd576cfb47beed46adf93b5e9, type: 3}
+    volume: 1
   - id:
       _id: 200
       _name: InGame
-    clip: {fileID: 8300000, guid: e0e43c628e1bee542bd57ac3d8780aff, type: 3}
+    clip: {fileID: 8300000, guid: 8ac8adebe4d28ec458b15003d45da7dd, type: 3}
+    volume: 0.6

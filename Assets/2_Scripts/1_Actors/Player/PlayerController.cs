@@ -43,6 +43,8 @@ namespace JumpRabbit.Actors.Player
 
         private void Update()
         {
+            if (TimeManager.Instance.IsGamePaused) return;
+
             UpdateLookDirection();
 
             if (_isChargingJump)

@@ -1,3 +1,4 @@
+using System.Collections;
 using LSH.Core;
 using UnityEngine;
 
@@ -12,10 +13,16 @@ namespace JumpRabbit.Actors.Player
 
     public class PlayerAnimation : MonoBehaviour
     {
+        [Header("PlayerAnim")]
         [SerializeField] private Animator _animator;
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
+        [Header("JumpEffect")]
+        [SerializeField] private Animator _jumpEffect;
+        [SerializeField] private float _effectDuration = 0.23f;
+
         private static readonly int StateID = Animator.StringToHash("StateID");
+        private Coroutine _jumpEffectCoroutine;
 
         public void Init(SpriteRenderer spriteRenderer)
         {
@@ -38,7 +45,40 @@ namespace JumpRabbit.Actors.Player
 
         public void PlayIdle() => SetState(PlayerAnimState.Idle);
         public void PlayReadyJump() => SetState(PlayerAnimState.ReadyJump);
-        public void PlayJump() => SetState(PlayerAnimState.Jump);
+
+
+        public void PlayJump()
+        {
+            SetState(PlayerAnimState.Jump);
+
+            PlayJumpEffect();
+        }
+
+        private void PlayJumpEffect()
+        {
+            if (_jumpEffect == null || _jumpEffect == null)
+                return;
+
+            if (_jumpEffectCoroutine != null)
+                StopCoroutine(_jumpEffectCoroutine);
+            _jumpEffectCoroutine = StartCoroutine(PlayJumpEffectSequence());
+        }
+
+        private IEnumerator PlayJumpEffectSequence()
+        {
+            _jumpEffect.transform.SetParent(null);
+            _jumpEffect.gameObject.SetActive(true);
+
+            _jumpEffect.Play(0, 0, 0f);
+
+            yield return new WaitForSeconds(_effectDuration);
+
+            _jumpEffect.gameObject.SetActive(false);
+            _jumpEffect.transform.SetParent(transform, false);
+            _jumpEffect.transform.localPosition = Vector3.zero;
+
+            _jumpEffectCoroutine = null;
+        }
 
 
         private void SetState(PlayerAnimState state)

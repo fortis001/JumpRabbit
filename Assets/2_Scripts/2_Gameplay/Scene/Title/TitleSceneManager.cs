@@ -1,16 +1,18 @@
+using JumpRabbit.Core;
+using LSH.Core;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TitleSceneManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] TitleUIManager _uiManager;
 
-    // Update is called once per frame
-    void Update()
+
+    private void Start()
     {
-        
+        SoundManager.Instance.PlayBGM(BGMID.Title);
+        InputManager.Instance.SetActionMap(InputMapName.Title);
+
+        _uiManager.Init(InputManager.Instance);
     }
 }

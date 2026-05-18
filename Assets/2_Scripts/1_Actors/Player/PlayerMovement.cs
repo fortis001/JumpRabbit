@@ -7,6 +7,7 @@ namespace JumpRabbit.Actors.Player
 {
     public class PlayerMovement : MonoBehaviour
     {
+        #region Field
         [Header("References")]
         [SerializeField] private Rigidbody2D _rigidbody = null;
         [SerializeField] private Transform _groundCheck;
@@ -28,7 +29,17 @@ namespace JumpRabbit.Actors.Player
             TimeManager.Instance.GameTime.Time >=
             _lastJumpTime + _groundCheckDisableTimeAfterJump;
 
+        private Vector2 _cachedVelocity;
+        private float _cachedGravityScale;
+
         public event Action OnLanded;
+        #endregion
+
+        public void Init()
+        {
+            TimeManager.Instance.OnGamePaused += HandleGamePaused;
+            TimeManager.Instance.OnGameResumed += HandleGameResumed;
+        }
 
 
         private void FixedUpdate()
@@ -107,6 +118,34 @@ namespace JumpRabbit.Actors.Player
 
             OnLanded?.Invoke();
         }
+
+        #region Game Pause
+        private void HandleGamePaused()
+        {
+            _cachedVelocity = _rigidbody.linearVelocity;
+            _cachedGravityScale = _rigidbody.gravityScale;
+
+            _rigidbody.linearVelocity = Vector2.zero;
+            _rigidbody.gravityScale = 0f;
+        }
+
+        private void HandleGameResumed()
+        {
+            _rigidbody.gravityScale = _cachedGravityScale;
+            _rigidbody.linearVelocity = _cachedVelocity;
+        }
+        #endregion
+
+        #region CleanUP
+        private void OnDestroy()
+        {
+            if (TimeManager.Instance == null)
+                return;
+
+            TimeManager.Instance.OnGamePaused -= HandleGamePaused;
+            TimeManager.Instance.OnGameResumed -= HandleGameResumed;
+        }
+        #endregion
     }
 }
 

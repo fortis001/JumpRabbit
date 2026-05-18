@@ -6,8 +6,10 @@ using UnityEngine;
 
 namespace JumpRabbit.GamePlay.InGame
 {
+    
     public class PlatformManager : MonoBehaviour
     {
+        #region Field
         [SerializeField] private PlatformSpawnSettings _spawnSettings;
         [SerializeField] private Transform _poolRoot;
         [SerializeField] private Platform _startPlatform;
@@ -29,7 +31,9 @@ namespace JumpRabbit.GamePlay.InGame
         public event Action<Platform> OnValidPlatformLanded;
         public event Action<Platform> OnInvalidPlatformLanded;
         public event Action<float> OnCarrotCollected;
+        #endregion
 
+        #region Init
         public void Init(InGameCameraController cameraController, Transform player)
         {
             _platformPool = new PlatformPool(_poolRoot);
@@ -47,7 +51,9 @@ namespace JumpRabbit.GamePlay.InGame
 
             _player = player;
         }
+        #endregion
 
+        #region SpawnPlatform
         private void SpawnNextPlatform()
         {
             if (!_spawnSettings.TryGetRandomPlatform(out PlatformSpawnData spawnData))
@@ -106,7 +112,9 @@ namespace JumpRabbit.GamePlay.InGame
 
             OnCarrotCollected?.Invoke(additionalBonusRate);
         }
+        #endregion
 
+        #region Event
         private void HandlePlayerLandedPlatform(Platform platform, bool isFirstVisit)
         {
             if (platform.transform.position.y > _player.position.y) return;
@@ -134,7 +142,9 @@ namespace JumpRabbit.GamePlay.InGame
                 _cameraController.FocusToPlayer();
             }
         }
+        #endregion
 
+        #region DespawnPlatform
         private void ReleaseOldPlatform()
         {
             while (_platformQueue.Count > _maxPlatformCount)
@@ -161,6 +171,7 @@ namespace JumpRabbit.GamePlay.InGame
             platform.Deactivate();
             _platformPool.Release(platform);
         }
+        #endregion
     }
 }
 
