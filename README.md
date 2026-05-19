@@ -61,7 +61,10 @@ Unity로 제작한 플랫포머 점프 액션 프로젝트입니다.<br>
   - ScriptableObj인 SoundData에서 각 사운드 관리 가능
 - TransitionManager
   - SceneLoader와 한 쌍으로 운용해 페이드 기능, 씬 비동기 로드 등 기능
-- 
+- TimeManager
+  - TimeChannel로 시간축 다중 운용
+- CameraController
+  - 카메라 포커스, 줌 기능
 
 </details>
 
