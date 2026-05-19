@@ -50,10 +50,20 @@ Unity로 제작한 플랫포머 점프 액션 프로젝트입니다.<br>
 이번 프로젝트에서는 이전 프로젝트에서 사용해보지 못했던 상태 머신 기반의 애니메이터와 리지드바디, 콜라이더의 기능을 사용해봄과 동시에<br>
 분리된 코어 패키지가 실제로 활용 가능한지 검증에 초점을 두어 진행했다.
 
-<summary>
-
+<details>
+<summary>코어 패키지</summary>
   
-</summary>
+[링크](https://github.com/fortis001/Unity-LSH-Core)
+# 구성
+- InputManager
+  - New Input System과 ActionMap 활용
+- SoundManager
+  - ScriptableObj인 SoundData에서 각 사운드 관리 가능
+- TransitionManager
+  - SceneLoader와 한 쌍으로 운용해 페이드 기능, 씬 비동기 로드 등 기능
+- 
+
+</details>
 
 ## 7. 샘플 코드
 
