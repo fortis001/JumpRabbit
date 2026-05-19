@@ -76,7 +76,7 @@ Unity로 제작한 플랫포머 점프 액션 프로젝트입니다.<br>
 - PlayerAnimation, PlayerSound : 플레이어 애니메이션과 효과음 처리
 
 ## 7. 샘플 코드
-[PlatformManager](Assets/2_Scripts/2_Gameplay/Scene/InGame/PlatformManager.cs)
+[PlatformManager](Assets/2_Scripts/2_Gameplay/Scene/InGame/PlatformManager.cs)<br>
 [PlayerController](Assets/2_Scripts/1_Actors/Player/PlayerController.cs)
 
 ## 8. 고민했던 부분들
