@@ -68,12 +68,25 @@ Unity로 제작한 플랫포머 점프 액션 프로젝트입니다.<br>
 
 </details>
 
-## 7. 샘플 코드
+### 6.1 Player 구조
+- PlayerActor : 중심 호출부, 플레이어 객체 조립
+- PlayerController : 플레이어 컨트롤, 객체 기능 호출
+- PlayerMovement : 플레이어 움직임 처리, 그라운드 체크
+- PlayerAnimation, PlayerSound : 플레이어 애니메이션과 효과음 처리
 
+## 7. 샘플 코드
+[PlatformManager](Assets/2_Scripts/2_Gameplay/Scene/InGame/PlatformManager.cs)
+[PlayerController](Assets/2_Scripts/1_Actors/Player/PlayerController.cs)
 
 ## 8. 고민했던 부분들
+샘플 프로젝트에서는 점프 방향이 고정되어 있었고, 유저는 앞으로만 나아갈 수 있었기에 고려되지 않은 부분들이 많았다.
+- 유저가 역주행을 할 경우 배경과 플랫폼은 어떻게 할 것인가?
+- 같은 곳에 착지하거나, 플랫폼을 건너뛸 경우의 처리는 어떻게 할 것인가?
 
+이를 해결하기 위해 각 플랫폼에 방문 여부와 인덱스 번호를 부여해 이를 통해 inValid 조건을 판별했고<br>
+배경 타일링 로직을 구현, 오브젝트 풀링에서는 조건을 플랫폼 스폰 세팅에서 한 번에 조절할 수 있도록 ScriptableOBj로 만들었다.
 
 ## 9. 개선 가능한 부분
-
+- 아이템 종류 추가
+- 진행도에 따라 난이도 조절 기능
 
