@@ -5,7 +5,7 @@ Unity로 제작한 플랫포머 점프 액션 프로젝트입니다.<br>
 [개발 일지](./Devlog.md)
 
 ## 2. 시연 영상
-추가 예정
+[프로젝트 설명 영상](https://youtu.be/Aq4rmd6dd9E)
 
 ## 3. 다운로드
 [빌드 다운로드(Itch.io 링크)](https://fortis001.itch.io/jumprabbit)<br>
