@@ -55,6 +55,7 @@ Unity로 제작한 플랫포머 점프 액션 프로젝트입니다.<br>
 <summary>코어 패키지</summary>
   
 [링크](https://github.com/fortis001/Unity-LSH-Core)
+
 # 구성
 - InputManager
   - New Input System과 ActionMap 활용
